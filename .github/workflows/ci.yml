@@ -1,0 +1,17 @@
+name: Core CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source snapshot
+        run: python3 Tools/verify_manifest.py
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
